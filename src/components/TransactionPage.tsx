@@ -32,7 +32,7 @@ export const TransactionPage = () => {
         New Transfer
       </Button>
       <Modal onRequestClose={() => setIsOpen(false)} isOpen={isOpen}>
-        <Form />
+        <Form beneficiary={beneficiary} />
       </Modal>
     </div>
   )

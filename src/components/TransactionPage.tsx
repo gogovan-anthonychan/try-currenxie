@@ -7,11 +7,14 @@ import { Form } from './Form'
 import ReducerActions from '../store/actions'
 import { RootState } from '../store'
 import { BeneficiaryType } from '../Constants/types'
+import { TransactionConfirmation } from './TransactionConfirmation'
 
 Modal.setAppElement('#root')
 
 export const TransactionPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [pendingTransaction, setPendingTransaction] =
+    useState<{ beneficiary: BeneficiaryType; amount: string } | undefined>(undefined)
   let dispatch = useDispatch()
   let transactioins = useSelector((state: RootState) => state.transaction.data) || []
   let beneficiary = useSelector((state: RootState) => state.beneficiary.data) || []
@@ -25,7 +28,18 @@ export const TransactionPage = () => {
     setIsOpen((prevState) => !prevState)
   }
 
-  const onSubmit = (beneficiary: BeneficiaryType, amount: string) => {}
+  const onSubmit = (beneficiary: BeneficiaryType, amount: string) => {
+    setPendingTransaction({
+      beneficiary,
+      amount,
+    })
+  }
+
+  const onConfirm = () => {}
+
+  const onPressDismissConfirmation = () => {
+    setPendingTransaction(undefined)
+  }
 
   return (
     <div>
@@ -36,6 +50,16 @@ export const TransactionPage = () => {
       </Button>
       <Modal onRequestClose={() => setIsOpen(false)} isOpen={isOpen}>
         <Form beneficiary={beneficiary} onSubmitTransaction={onSubmit} />
+      </Modal>
+      <Modal onRequestClose={() => setPendingTransaction(undefined)} isOpen={!!pendingTransaction}>
+        {pendingTransaction?.beneficiary && pendingTransaction.amount && (
+          <TransactionConfirmation
+            onPressConfirm={onConfirm}
+            onPressClose={onPressDismissConfirmation}
+            beneficiary={pendingTransaction?.beneficiary}
+            amount={pendingTransaction?.amount}
+          />
+        )}
       </Modal>
     </div>
   )

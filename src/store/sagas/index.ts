@@ -27,7 +27,17 @@ function* fetchTransactions() {
   }
 }
 
+function* postTransactions(action: { type: string; transaction: { amount: string; beneficiary: BeneficiaryType } }) {
+  const randomRespose = Math.random() * 100
+  if (randomRespose > 50) {
+    yield put({ type: ReducerActions.MAKE_TRANSACTION_SUCCESS })
+  } else {
+    yield put({ type: ReducerActions.MAKE_TRANSACTION_FAILED })
+  }
+}
+
 export function* appSaga() {
   yield takeLatest(ReducerActions.GET_TRANSACTION, fetchTransactions)
   yield takeLatest(ReducerActions.GET_BENEFICIARY, fetchBeneficiary)
+  yield takeLatest(ReducerActions.MAKE_TRANSACTION, postTransactions)
 }

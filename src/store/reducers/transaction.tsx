@@ -3,11 +3,13 @@ import ReducerActions from '../actions'
 
 export type TransactionState = {
   status: LoadingStatusType
+  transactionStatus: LoadingStatusType
   data?: [TransactionType]
 }
 
 const initTransactionState: TransactionState = {
   status: 'IDEL',
+  transactionStatus: 'IDEL'
 }
 
 export const transactionReducer = (
@@ -21,6 +23,10 @@ export const transactionReducer = (
       return { ...state, status: 'SUCCESS', data: action.data }
     case ReducerActions.GET_TRANSACTION_FAILED:
       return { ...state, status: 'FAILED' }
+    case ReducerActions.MAKE_TRANSACTION_SUCCESS:
+      return { ...state, transactionStatus: 'SUCCESS'}
+    case ReducerActions.MAKE_TRANSACTION_FAILED:
+      return { ...state, transactionStatus: 'FAILED'}
     default:
       return state
   }

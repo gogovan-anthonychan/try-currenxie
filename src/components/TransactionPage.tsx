@@ -35,7 +35,9 @@ export const TransactionPage = () => {
     })
   }
 
-  const onConfirm = () => {}
+  const onConfirm = () => {
+    dispatch({type: ReducerActions.MAKE_TRANSACTION, transaction: pendingTransaction})
+  }
 
   const onPressDismissConfirmation = () => {
     setPendingTransaction(undefined)

@@ -12,8 +12,11 @@ export const TransactionPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   let dispatch = useDispatch()
 
-  const onPressButton = () => {
+  useEffect(() => {
     dispatch({type: ReducerActions.GET_TRANSACTION})
+  }, [])
+
+  const onPressButton = () => {
     setIsOpen((prevState) => !prevState)
   }
 

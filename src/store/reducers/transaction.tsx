@@ -1,4 +1,4 @@
-import { LoadingStatusType } from '../../Constants/types'
+import { LoadingStatusType, TransactionType } from '../../Constants/types'
 import ReducerActions from '../actions'
 
 export const permissionStatus = {
@@ -16,17 +16,24 @@ export const status = {
 
 type TransactionState = {
   status: LoadingStatusType
+  data?: [TransactionType]
 }
 
 const initTransactionState: TransactionState = {
   status: 'IDEL',
 }
 
-export const transactionReducer = (state: TransactionState = initTransactionState, action: { type: string }) => {
+export const transactionReducer = (
+  state: TransactionState = initTransactionState,
+  action: { type: string; data: [TransactionType] }
+): TransactionState => {
   switch (action.type) {
     case ReducerActions.GET_TRANSACTION:
-      console.log('get transaction')
-      return state
+      return { ...state, status: 'IDEL' }
+    case ReducerActions.GET_TRANSACTION_SUCCESS:
+      return { ...state, status: 'SUCCESS', data: action.data }
+    case ReducerActions.GET_TRANSACTION_FAILED:
+      return { ...state, status: 'FAILED' }
     default:
       return state
   }

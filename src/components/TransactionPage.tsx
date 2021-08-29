@@ -12,10 +12,12 @@ Modal.setAppElement('#root')
 export const TransactionPage = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   let dispatch = useDispatch()
-  let transactioins = useSelector((state: RootState) => state.transactionReducer.data) || []
+  let transactioins = useSelector((state: RootState) => state.transaction.data) || []
+  let beneficiary = useSelector((state: RootState) => state.beneficiary.data) || []
 
   useEffect(() => {
-    dispatch({type: ReducerActions.GET_TRANSACTION})
+    dispatch({ type: ReducerActions.GET_TRANSACTION })
+    dispatch({ type: ReducerActions.GET_BENEFICIARY })
   }, [])
 
   const onPressButton = () => {
@@ -25,7 +27,7 @@ export const TransactionPage = () => {
   return (
     <div>
       <h1>Transactions</h1>
-      <TransactionsTable transactions={transactioins}/>
+      <TransactionsTable transactions={transactioins} />
       <Button onClick={onPressButton} variant='contained' color='primary'>
         New Transfer
       </Button>

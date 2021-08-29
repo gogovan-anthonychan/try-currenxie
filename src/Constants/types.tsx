@@ -8,3 +8,9 @@ export type TransactionType = {
   holderName: string
   id: string
 }
+
+export type BeneficiaryType = {
+  supportedCurrency: string
+  holderName: string
+  id: string
+}

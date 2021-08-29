@@ -1,6 +1,8 @@
+import { beneficiaryReducer } from './beneficiary';
 import { transactionReducer } from './transaction';
 import { combineReducers } from "redux";
 
 export const rootReducer = combineReducers({
-  transactionReducer
+  transaction: transactionReducer,
+  beneficiary: beneficiaryReducer
 });

@@ -3,14 +3,16 @@ import createSagaMiddleware from "redux-saga";
 import logger from 'redux-logger'
 
 import { rootReducer } from "./reducers";
-import { helloSaga } from "./sagas";
+import { appSaga } from "./sagas";
 import { TransactionState } from "./reducers/transaction";
+import { BeneficiaryState } from "./reducers/beneficiary";
 
 const sagaMiddleware = createSagaMiddleware();
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
 
-sagaMiddleware.run(helloSaga);
+sagaMiddleware.run(appSaga);
 
 export type RootState = {
-  transactionReducer: TransactionState
+  transaction: TransactionState
+  beneficiary: BeneficiaryState
 }

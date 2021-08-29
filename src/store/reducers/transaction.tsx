@@ -1,19 +1,6 @@
 import { LoadingStatusType, TransactionType } from '../../Constants/types'
 import ReducerActions from '../actions'
 
-export const permissionStatus = {
-  UNCHECK: 'UNCHECK',
-  IS_GRANTED: 'IS_GRANTED',
-  IS_DENIED: 'IS_DENIED',
-}
-
-export const status = {
-  IDEL: 'IDEL',
-  SAVEING: 'SAVEING',
-  FAIL: 'FAIL',
-  SUCCESS: 'SUCCESS',
-}
-
 export type TransactionState = {
   status: LoadingStatusType
   data?: [TransactionType]

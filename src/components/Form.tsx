@@ -11,7 +11,7 @@ const options = [
 ];
 
 export const Form: FC = () => {
-  const onSubmit = (values) => {
+  const onSubmit = (values: string) => {
     console.log(values);
   };
 

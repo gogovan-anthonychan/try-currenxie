@@ -14,7 +14,7 @@ export const status = {
   SUCCESS: 'SUCCESS',
 }
 
-type TransactionState = {
+export type TransactionState = {
   status: LoadingStatusType
   data?: [TransactionType]
 }

@@ -6,11 +6,12 @@ import { TransactionsTable } from './TransactionsTable'
 import { Form } from './Form'
 import ReducerActions from '../store/actions'
 import { RootState } from '../store'
+import { BeneficiaryType } from '../Constants/types'
 
 Modal.setAppElement('#root')
 
 export const TransactionPage = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(true)
   let dispatch = useDispatch()
   let transactioins = useSelector((state: RootState) => state.transaction.data) || []
   let beneficiary = useSelector((state: RootState) => state.beneficiary.data) || []
@@ -24,6 +25,8 @@ export const TransactionPage = () => {
     setIsOpen((prevState) => !prevState)
   }
 
+  const onSubmit = (beneficiary: BeneficiaryType, amount: string) => {}
+
   return (
     <div>
       <h1>Transactions</h1>
@@ -32,7 +35,7 @@ export const TransactionPage = () => {
         New Transfer
       </Button>
       <Modal onRequestClose={() => setIsOpen(false)} isOpen={isOpen}>
-        <Form beneficiary={beneficiary} />
+        <Form beneficiary={beneficiary} onSubmitTransaction={onSubmit} />
       </Modal>
     </div>
   )

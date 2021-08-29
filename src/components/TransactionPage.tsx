@@ -13,7 +13,7 @@ import { TransactionResult } from './TransactionResult'
 Modal.setAppElement('#root')
 
 export const TransactionPage = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isTransactionSuccess, setIsTransactionSuccess] = useState<boolean | undefined>(undefined)
   const [pendingTransaction, setPendingTransaction] =
     useState<{ beneficiary: BeneficiaryType; amount: string } | undefined>(undefined)
